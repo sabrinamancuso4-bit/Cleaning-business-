@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/*
+ * Brand tokens. Change colours here and every component follows.
+ * (Utilities: bg-navy, text-teal, border-line, etc.)
+ */
+@theme {
+  --color-navy: #142638;
+  --color-navy-900: #0d1a27;
+  --color-navy-700: #1f3a52;
+  --color-paper: #fafaf7;
+  --color-mist: #edf0f1;
+  --color-teal: #3f817d;
+  --color-teal-600: #346d69;
+  --color-teal-100: #e1edec;
+  --color-charcoal: #20272b;
+  --color-muted: #59656c;
+  --color-line: #dde2e4;
+  --color-sand: #b89f80;
+  --color-danger: #b4372f;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --shadow-soft: 0 1px 2px rgb(20 38 56 / 0.04), 0 8px 24px -8px rgb(20 38 56 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(20 38 56 / 0.04), 0 24px 48px -16px rgb(20 38 56 / 0.24);
+
+  --animate-marquee: marquee 40s linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-charcoal font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-navy;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { @apply bg-teal text-white; }
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  /* Offset in-page anchors for the sticky header. */
+  [id] { scroll-margin-top: 6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) { padding-inline: 1.5rem; }
+  @media (width >= 64rem) { padding-inline: 2rem; }
+}
+
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+
+@utility img-treatment {
+  /* Consistent editorial treatment across all photography. */
+  filter: saturate(0.92) contrast(1.02);
+}
+
+@keyframes acc-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes acc-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes dialog-in {
+  from { opacity: 0; scale: 0.97; }
+  to { opacity: 1; scale: 1; }
+}
